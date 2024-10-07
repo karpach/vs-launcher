@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/vs-launcher
+/bin/Debug
+/obj/Debug
+/packages
+/vs-launcher.csproj.user
+/.vs/vs-launcher.csproj.dtbcache.json
