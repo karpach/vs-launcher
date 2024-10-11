@@ -1,6 +1,6 @@
 # Visual Studio Launcher tool
 
-vs-launcher repositroy compiles into vsl.exe.
+vs-launcher repositroy compiles into vs-launcher.exe.
 
 That executable expect a custom protocol url passed as an argument. The custom protocol url should be in the following format:
 
