@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "vs-launcher": {
+      "commandName": "Project",
+      "commandLineArgs": "\"vscode-insiders://file/c:/SourceCode/vs-launcher/Program.cs:10\""
+    }
+  }
+}
