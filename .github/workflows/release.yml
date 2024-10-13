@@ -26,8 +26,8 @@ jobs:
     - name: Update version in .csproj
       run: |
         $version = '${{ github.event.inputs.release_version }}'
-        (Get-Content -Path "vs-launcher.csproj") -replace '<Version>.*</Version>', "<Version>$version</Version>" | Set-Content -Path "vs-launcher.csproj"		
-        (Get-Content -Path "vs-launcher.csproj") -replace '<FileVersion>.*</FileVersion>', "<FileVersion>$version</FileVersion>" | Set-Content -Path "vs-launcher.csproj"		
+        (Get-Content -Path "Karpach.VisualStudio.Launcher\\Karpach.VisualStudio.Launcher.csproj") -replace '<Version>.*</Version>', "<Version>$version</Version>" | Set-Content -Path "Karpach.VisualStudio.Launcher\\Karpach.VisualStudio.Launcher.csproj"		
+        (Get-Content -Path "Karpach.VisualStudio.Launcher\\Karpach.VisualStudio.Launcher.csproj") -replace '<FileVersion>.*</FileVersion>', "<FileVersion>$version</FileVersion>" | Set-Content -Path "Karpach.VisualStudio.Launcher\\Karpach.VisualStudio.Launcher.csproj"		
 
     - name: Restore dependencies
       run: dotnet restore
@@ -38,8 +38,8 @@ jobs:
     - name: Create zip file
       run: |
         $version = '${{ github.event.inputs.release_version }}'
-        $outputPath = "bin\\Release\\net8.0-windows\\vs-launcher-$version.zip"
-        Compress-Archive -Path "bin\\Release\\net8.0-windows\\*" -DestinationPath $outputPath
+        $outputPath = "Karpach.VisualStudio.Launcher\\bin\\Release\\net8.0-windows\\vs-launcher-$version.zip"
+        Compress-Archive -Path "Karpach.VisualStudio.Launcher\\bin\\Release\\net8.0-windows\\*" -DestinationPath $outputPath
 
     - name: Create Release
       id: create_release
@@ -58,6 +58,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: bin\\Release\\net8.0-windows\\vs-launcher-${{ github.event.inputs.release_version }}.zip
+        asset_path: Karpach.VisualStudio.Launcher\\bin\\Release\\net8.0-windows\\vs-launcher-${{ github.event.inputs.release_version }}.zip
         asset_name: vs-launcher-${{ github.event.inputs.release_version }}.zip
         asset_content_type: application/zip
