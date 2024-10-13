@@ -22,4 +22,12 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal --logger "trx;LogFileName=results.xml" 
+    - name: Test Summary
+      uses: test-summary/action@v2
+      if: always()
+      with:
+        paths: |          
+          Karpach.VisualStudio.Launcher.Tests/TestResults/results.xml
+        labels: 'unit' 
+        fail_on_failure: true 
