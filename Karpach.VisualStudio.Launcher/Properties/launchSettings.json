@@ -1,8 +1,8 @@
 {
   "profiles": {
-    "vs-launcher": {
+    "Karpach.VisualStudio.Launcher": {
       "commandName": "Project",
-      "commandLineArgs": "\"vscode-insiders://file/c:/SourceCode/vs-launcher/Program.cs:10\""
+      "commandLineArgs": "\"vscode-insiders://file/c:/SourceCode/vs-launcher/Karpach.VisualStudio.Launcher/Program.cs:5\""
     }
   }
 }

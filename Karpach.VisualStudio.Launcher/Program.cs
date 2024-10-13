@@ -16,6 +16,7 @@ namespace Karpach.VisualStudio.Launcher
 			Host.CreateDefaultBuilder(args)
 				.ConfigureServices((_, services) =>
 					services.AddSingleton<Application>()
-						.AddSingleton<IVisualStudioLocator, VisualStudioLocator>());
+						.AddSingleton<IVisualStudioLocator, VisualStudioLocator>()
+						.AddSingleton<IMessageBox, MessageBox>());
 	}
 }

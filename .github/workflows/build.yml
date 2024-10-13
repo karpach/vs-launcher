@@ -28,6 +28,6 @@ jobs:
       if: always()
       with:
         paths: |          
-          Karpach.VisualStudio.Launcher.Tests/TestResults/results.xml
+          /Karpach.VisualStudio.Launcher.Tests/TestResults/results.xml
         labels: 'unit' 
         fail_on_failure: true 
