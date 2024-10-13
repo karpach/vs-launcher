@@ -1,0 +1,55 @@
+name: Manual Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: 'Release version'
+        required: true
+        default: '1.0.0'
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Create zip file
+      run: |
+        $version = '${{ github.event.inputs.release_version }}'
+        $outputPath = "bin\\Release\\net8.0-windows\\vs-launcher-$version.zip"
+        Compress-Archive -Path "bin\\Release\\net8.0-windows\\*" -DestinationPath $outputPath
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.event.inputs.release_version }}
+        release_name: Release ${{ github.event.inputs.release_version }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: bin\\Release\\net8.0-windows\\vs-launcher-${{ github.event.inputs.release_version }}.zip
+        asset_name: vs-launcher-${{ github.event.inputs.release_version }}.zip
+        asset_content_type: application/zip

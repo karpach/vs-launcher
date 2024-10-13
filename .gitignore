@@ -10,3 +10,4 @@
 /.vs/vs-launcher.csproj.dtbcache.json
 /obj
 /.vs/ProjectEvaluation
+/bin/Release/net8.0-windows
