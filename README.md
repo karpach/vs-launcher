@@ -1,5 +1,7 @@
 # Visual Studio Launcher tool
 
+![Build Status](https://github.com/karpach/vs-launcher/actions/workflows/build.yml/badge.svg)
+
 vs-launcher repositroy compiles into vs-launcher.exe.
 
 That executable expect a custom protocol url passed as an argument. The custom protocol url should be in the following format:
