@@ -11,6 +11,8 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    permissions:
+      contents: write 
 
     steps:
     - name: Checkout repository
@@ -20,6 +22,12 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: '8.0.x'
+
+    - name: Update version in .csproj
+      run: |
+        $version = '${{ github.event.inputs.release_version }}'
+        (Get-Content -Path "vs-launcher.csproj") -replace '<Version>.*</Version>', "<Version>$version</Version>" | Set-Content -Path "vs-launcher.csproj"		
+        (Get-Content -Path "vs-launcher.csproj") -replace '<FileVersion>.*</FileVersion>', "<FileVersion>$version</FileVersion>" | Set-Content -Path "vs-launcher.csproj"		
 
     - name: Restore dependencies
       run: dotnet restore
