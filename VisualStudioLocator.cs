@@ -5,8 +5,53 @@ using System.Runtime.InteropServices.ComTypes;
 
 namespace Karpach.VisualStudio.Launcher
 {
-	public class VisualStudioLocator
+	public class VisualStudioLocator : IVisualStudioLocator
 	{
+		/// <summary>
+		/// Get a table of the currently running instances of the Visual Studio .NET IDE.
+		/// </summary>
+		/// <param name="openSolutionsOnly">Only return instances that have opened a solution</param>
+		/// <returns>A hashtable mapping the name of the IDE in the running object table to the corresponding DTE object</returns>
+		public _DTE[] GetIDEInstances(bool openSolutionsOnly)
+		{
+			var runningIDEInstances = new Dictionary<string, _DTE>();
+			Hashtable runningObjects = GetRunningObjectTable();
+
+			IDictionaryEnumerator rotEnumerator = runningObjects.GetEnumerator();
+			while (rotEnumerator.MoveNext())
+			{
+				string candidateName = (string)rotEnumerator.Key;
+				if (candidateName != null && !candidateName.StartsWith("!VisualStudio.DTE"))
+				{
+					continue;
+				}
+
+				_DTE ide = rotEnumerator.Value as _DTE;
+				if (ide == null)
+				{
+					continue;
+				}
+
+				if (openSolutionsOnly)
+				{
+					try
+					{
+						string solutionFile = ide.Solution.FullName;
+						if (!string.IsNullOrEmpty(solutionFile))
+						{
+							runningIDEInstances[candidateName] = ide;
+						}
+					}
+					catch { }
+				}
+				else
+				{
+					runningIDEInstances[candidateName] = ide;
+				}
+			}
+			return runningIDEInstances.Values.ToArray();
+		}
+
 		[DllImport("ole32.dll", EntryPoint = "GetRunningObjectTable")]
 		private static extern uint GetRunningObjectTable(uint res, out IRunningObjectTable runningObjectTable);
 
@@ -45,51 +90,6 @@ namespace Karpach.VisualStudio.Launcher
 			}
 
 			return result;
-		}
-
-		/// <summary>
-		/// Get a table of the currently running instances of the Visual Studio .NET IDE.
-		/// </summary>
-		/// <param name="openSolutionsOnly">Only return instances that have opened a solution</param>
-		/// <returns>A hashtable mapping the name of the IDE in the running object table to the corresponding DTE object</returns>
-		public static _DTE[] GetIDEInstances(bool openSolutionsOnly)
-		{
-			var runningIDEInstances = new Dictionary<string, _DTE>();
-			Hashtable runningObjects = GetRunningObjectTable();
-
-			IDictionaryEnumerator rotEnumerator = runningObjects.GetEnumerator();
-			while (rotEnumerator.MoveNext())
-			{
-				string candidateName = (string)rotEnumerator.Key;
-				if (candidateName != null && !candidateName.StartsWith("!VisualStudio.DTE"))
-				{
-					continue;
-				}
-
-				_DTE ide = rotEnumerator.Value as _DTE;
-				if (ide == null)
-				{
-					continue;
-				}
-
-				if (openSolutionsOnly)
-				{
-					try
-					{
-						string solutionFile = ide.Solution.FullName;
-						if (!string.IsNullOrEmpty(solutionFile))
-						{
-							runningIDEInstances[candidateName] = ide;
-						}
-					}
-					catch { }
-				}
-				else
-				{
-					runningIDEInstances[candidateName] = ide;
-				}
-			}
-			return runningIDEInstances.Values.ToArray();
 		}
 	}
 }

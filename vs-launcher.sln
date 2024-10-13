@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35201.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vs-launcher", "vs-launcher.csproj", "{E42F2830-863E-421F-90E5-5D7303F6D90E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Karpach.VisualStudio.Launcher", "Karpach.VisualStudio.Launcher.csproj", "{E42F2830-863E-421F-90E5-5D7303F6D90E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
