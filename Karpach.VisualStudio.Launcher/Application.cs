@@ -1,4 +1,5 @@
-﻿using EnvDTE;
+﻿using System.Text;
+using EnvDTE;
 using System.Text.RegularExpressions;
 
 namespace Karpach.VisualStudio.Launcher;
@@ -6,25 +7,34 @@ namespace Karpach.VisualStudio.Launcher;
 public class Application
 {
 	private readonly IVisualStudioLocator _visualStudioLocator;
+	private readonly IMessageBox _messageBox;
 
-	public Application(IVisualStudioLocator visualStudioLocator)
+	public Application(IVisualStudioLocator visualStudioLocator, IMessageBox messageBox)
 	{
 		_visualStudioLocator = visualStudioLocator;
+		_messageBox = messageBox;
 	}
 
 	public async Task Run(string[] args)
 	{
 		if (args.Length == 0)
 		{
-			Console.WriteLine("Please provide a URL");
+			_messageBox.ShowError("Please provide a URL.");
 			return;
 		}
 		string url = args[0];
 		(string filePath, int lineNumber) = ExtractFilePathAndLineNumber(url);
+		if (string.IsNullOrEmpty(filePath))
+		{
+			return;
+		}
 		_DTE[] instances = _visualStudioLocator.GetIDEInstances(true);
+		StringBuilder solutionNames = new StringBuilder();
+		bool found = false;
 		foreach (_DTE instance in instances)
 		{
 			string solutionDirectory = Path.GetDirectoryName(instance.Solution.FileName);
+			solutionNames.AppendLine(instance.Solution.FileName);
 			if (filePath.StartsWith(solutionDirectory, StringComparison.OrdinalIgnoreCase))
 			{
 				instance.MainWindow.Activate();
@@ -32,11 +42,16 @@ public class Application
 				await Task.Delay(100);
 				TextSelection selection = (TextSelection)instance.ActiveDocument.Selection;
 				selection.GotoLine(lineNumber);
+				found = true;
 			}
+		}
+		if (!found)
+		{
+			_messageBox.ShowError($"No Visual Studio instance found with the following solutions:{Environment.NewLine}{solutionNames}");
 		}
 	}
 
-	private static (string filePath, int lineNumber) ExtractFilePathAndLineNumber(string url)
+	internal (string filePath, int lineNumber) ExtractFilePathAndLineNumber(string url)
 	{
 		var match = Regex.Match(url, @"\w+://file/(?<filePath>.*):(?<lineNumber>\d+)");
 		if (match.Success)
@@ -45,6 +60,7 @@ public class Application
 			int lineNumber = int.Parse(match.Groups["lineNumber"].Value);
 			return (filePath, lineNumber);
 		}
-		throw new ArgumentException("Invalid URL format", nameof(url));
+		_messageBox.ShowError($"Invalid URL format {url}");
+		return (string.Empty, 0);
 	}
 }

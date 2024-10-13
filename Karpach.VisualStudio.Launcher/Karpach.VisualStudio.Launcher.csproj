@@ -19,7 +19,8 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageId>KarpachVisualStudioLauncher</PackageId>
     <Version>1.0.0</Version>
-	<FileVersion>1.0.0</FileVersion>	
+	<FileVersion>1.0.0</FileVersion>
+	<UseWindowsForms>True</UseWindowsForms>	
   </PropertyGroup>
 
   <ItemGroup>
