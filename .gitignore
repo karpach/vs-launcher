@@ -2,12 +2,9 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs/vs-launcher
-/bin/Debug
-/obj/Debug
-/packages
-/vs-launcher.csproj.user
-/.vs/vs-launcher.csproj.dtbcache.json
-/obj
-/.vs/ProjectEvaluation
-/bin/Release/net8.0-windows
+/Karpach.VisualStudio.Launcher/bin
+/Karpach.VisualStudio.Launcher/obj
+/Karpach.VisualStudio.Launcher/Karpach.VisualStudio.Launcher.csproj.user
+/Karpach.VisualStudio.Launcher.Tests/bin
+/Karpach.VisualStudio.Launcher.Tests/obj
+/.vs

@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		registration.reg = registration.reg
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Karpach.VisualStudio.Launcher.Tests", "Karpach.VisualStudio.Launcher.Tests\Karpach.VisualStudio.Launcher.Tests.csproj", "{6EA3FA3E-7296-4CC8-B01A-1CACEC6F16AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E42F2830-863E-421F-90E5-5D7303F6D90E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E42F2830-863E-421F-90E5-5D7303F6D90E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E42F2830-863E-421F-90E5-5D7303F6D90E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EA3FA3E-7296-4CC8-B01A-1CACEC6F16AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EA3FA3E-7296-4CC8-B01A-1CACEC6F16AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EA3FA3E-7296-4CC8-B01A-1CACEC6F16AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EA3FA3E-7296-4CC8-B01A-1CACEC6F16AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
