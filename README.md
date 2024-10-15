@@ -23,6 +23,12 @@ The tool works in conjution with Google Chrome extension:
 1. Install the Chrome extension from the above link
 2. In extension options set Local path where GitHub repositories are cloned
 3. Set "The IDE you want to use to open GitHub links" to "Visual Studio Code Insiders"
-2. Compile the solution in this repository
-3. Edit registration.reg file and replace the path to vsl.exe with the path to your vsl.exe
-4. Run registration.reg
+
+![Open GitHub in IDE Settings](ScreenShots/extension-settings.png "Open GitHub in IDE Settings")
+
+4. Compile the solution in this repository or download the latest release from the releases page
+5. Edit registration.reg file and replace the path to vs-launcher.exe with the path to your vs-launcher.exe
+6. Run registration.reg
+7. Try clicking an icon in the GitHub file view
+
+![GitHub link clicking demo](ScreenShots/github-demo.png "GitHub link clicking demo")

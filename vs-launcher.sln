@@ -11,7 +11,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		registration.reg = registration.reg
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Karpach.VisualStudio.Launcher.Tests", "Karpach.VisualStudio.Launcher.Tests\Karpach.VisualStudio.Launcher.Tests.csproj", "{6EA3FA3E-7296-4CC8-B01A-1CACEC6F16AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Karpach.VisualStudio.Launcher.Tests", "Karpach.VisualStudio.Launcher.Tests\Karpach.VisualStudio.Launcher.Tests.csproj", "{6EA3FA3E-7296-4CC8-B01A-1CACEC6F16AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScreenShots", "ScreenShots", "{B3E665BC-0E31-4AC8-B971-DDE9454A824C}"
+	ProjectSection(SolutionItems) = preProject
+		ScreenShots\extension-settings.png = ScreenShots\extension-settings.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
