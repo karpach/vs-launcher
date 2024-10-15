@@ -17,6 +17,7 @@ namespace Karpach.VisualStudio.Launcher
 				.ConfigureServices((_, services) =>
 					services.AddSingleton<Application>()
 						.AddSingleton<IVisualStudioLocator, VisualStudioLocator>()
-						.AddSingleton<IMessageBox, MessageBox>());
+						.AddSingleton<IMessageBox, MessageBox>()
+						.AddSingleton<IVisualStudioCommander, VisualStudioCommander>());
 	}
 }

@@ -8,11 +8,13 @@ public class Application
 {
 	private readonly IVisualStudioLocator _visualStudioLocator;
 	private readonly IMessageBox _messageBox;
+	private readonly IVisualStudioCommander _visualStudioCommander;
 
-	public Application(IVisualStudioLocator visualStudioLocator, IMessageBox messageBox)
+	public Application(IVisualStudioLocator visualStudioLocator, IMessageBox messageBox, IVisualStudioCommander visualStudioCommander)
 	{
 		_visualStudioLocator = visualStudioLocator;
 		_messageBox = messageBox;
+		_visualStudioCommander = visualStudioCommander;
 	}
 
 	public async Task Run(string[] args)
@@ -37,11 +39,7 @@ public class Application
 			solutionNames.AppendLine(instance.Solution.FileName);
 			if (filePath.StartsWith(solutionDirectory, StringComparison.OrdinalIgnoreCase))
 			{
-				instance.MainWindow.Activate();
-				instance.ItemOperations.OpenFile(filePath);
-				await Task.Delay(100);
-				TextSelection selection = (TextSelection)instance.ActiveDocument.Selection;
-				selection.GotoLine(lineNumber);
+				_visualStudioCommander.OpenFileInVisualStudio(filePath, lineNumber);
 				found = true;
 			}
 		}
