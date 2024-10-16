@@ -106,7 +106,7 @@ namespace Karpach.VisualStudio.Launcher.Tests
 
 			// Assert
 			string expectedSolutionNames = string.Join(Environment.NewLine, solutionNames);
-			_messageBox.Verify(x => x.ShowError($"No Visual Studio instance found with the following solutions:{Environment.NewLine}{expectedSolutionNames}{Environment.NewLine}"), Times.Once);
+			_messageBox.Verify(x => x.ShowError($"The following solutions don't match requested url:{Environment.NewLine}{expectedSolutionNames}{Environment.NewLine}"), Times.Once);
 		}
 
 		[Test]
@@ -133,7 +133,7 @@ namespace Karpach.VisualStudio.Launcher.Tests
 			await _instance.Run(args);
 
 			// Assert
-			_visualStudioCommander.Verify(x => x.OpenFileInVisualStudio(@"c:\SourceCode\vs-launcher\Program.cs", lineNumber), Times.Once);
+			_visualStudioCommander.Verify(x => x.OpenFileInVisualStudio(instances[1].Object, @"c:\SourceCode\vs-launcher\Program.cs", lineNumber), Times.Once);
 		}
 	}
 }

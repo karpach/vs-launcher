@@ -4,19 +4,12 @@ namespace Karpach.VisualStudio.Launcher;
 
 public class VisualStudioCommander : IVisualStudioCommander
 {
-	private _DTE _instance;
-
-	public VisualStudioCommander(_DTE instance)
+	public async Task OpenFileInVisualStudio(_DTE dte, string filePath, int lineNumber)
 	{
-		_instance = instance;
-	}
-
-	public async Task OpenFileInVisualStudio(string filePath, int lineNumber)
-	{
-		_instance.MainWindow.Activate();
-		_instance.ItemOperations.OpenFile(filePath);
+		dte.MainWindow.Activate();
+		dte.ItemOperations.OpenFile(filePath);
 		await Task.Delay(100);
-		TextSelection selection = (TextSelection)_instance.ActiveDocument.Selection;
+		TextSelection selection = (TextSelection)dte.ActiveDocument.Selection;
 		selection.GotoLine(lineNumber);
 	}
 }

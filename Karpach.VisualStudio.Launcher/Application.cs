@@ -39,13 +39,13 @@ public class Application
 			solutionNames.AppendLine(instance.Solution.FileName);
 			if (filePath.StartsWith(solutionDirectory, StringComparison.OrdinalIgnoreCase))
 			{
-				_visualStudioCommander.OpenFileInVisualStudio(filePath, lineNumber);
+				_visualStudioCommander.OpenFileInVisualStudio(instance, filePath, lineNumber);
 				found = true;
 			}
 		}
 		if (!found)
 		{
-			_messageBox.ShowError($"No Visual Studio instance found with the following solutions:{Environment.NewLine}{solutionNames}");
+			_messageBox.ShowError($"The following solutions don't match requested url:{Environment.NewLine}{solutionNames}");
 		}
 	}
 

@@ -1,6 +1,8 @@
-﻿namespace Karpach.VisualStudio.Launcher;
+﻿using EnvDTE;
+
+namespace Karpach.VisualStudio.Launcher;
 
 public interface IVisualStudioCommander
 {
-	Task OpenFileInVisualStudio(string filePath, int lineNumber);
+	Task OpenFileInVisualStudio(_DTE dte, string filePath, int lineNumber);
 }
