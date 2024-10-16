@@ -32,3 +32,6 @@ The tool works in conjution with Google Chrome extension:
 7. Try clicking an icon in the GitHub file view
 
 ![GitHub link clicking demo](ScreenShots/github-demo.png "GitHub link clicking demo")
+
+![Opening URL using Visual Studio Launcher](ScreenShots/open-external-application-url.png "Opening URL using Visual Studio Launcher")
+
